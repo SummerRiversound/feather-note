@@ -1,4 +1,4 @@
-# 깃털노트 · Feather Note
+# 새찍도감 · Feather Note
 
 찍으면 채워지는 새 도감. / The bird dex on your phone.
 

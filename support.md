@@ -1,4 +1,4 @@
-# 깃털노트 지원 / Feather Note Support
+# 새찍도감 지원 / Feather Note Support
 
 ## 한국어
 
