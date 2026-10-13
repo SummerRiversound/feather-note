@@ -2,7 +2,7 @@
 
 ## 한국어
 
-문의: **gkdms1247@gmail.com**
+문의: **summer.riversound@gmail.com**
 
 ### 자주 묻는 것
 
@@ -15,7 +15,7 @@
 
 ## English
 
-Contact: **gkdms1247@gmail.com**
+Contact: **summer.riversound@gmail.com**
 
 ### Common questions
 

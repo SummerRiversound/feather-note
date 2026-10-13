@@ -57,7 +57,7 @@
 
 ### 문의
 
-gkdms1247@gmail.com
+summer.riversound@gmail.com
 
 ## English
 
@@ -114,4 +114,4 @@ Feather Note is not directed at children and collects no personal information, i
 
 ### Contact
 
-gkdms1247@gmail.com
+summer.riversound@gmail.com
