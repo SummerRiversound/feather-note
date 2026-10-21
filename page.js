@@ -18,6 +18,7 @@
       endBody: "iPhone과 Android에서 만나요.",
       privacy: "개인정보 처리방침", support: "지원",
       credits: "© 2026 SummerRiversound · 글꼴 갈무리(SIL OFL 1.1)",
+      share: "공유", shareText: "새찍도감 사이트에서 숨은 새 세 마리를 찍었어요!", copied: "주소를 복사했어요", saved: "그림을 저장했어요",
     },
     en: {
       name: "Feather Note", shootTab: "Photograph", platforms: "iPhone · Android",
@@ -36,6 +37,7 @@
       endBody: "Coming to iPhone and Android.",
       privacy: "Privacy Policy", support: "Support",
       credits: "© 2026 SummerRiversound · Font: Galmuri (SIL OFL 1.1)",
+      share: "Share", shareText: "I found three hidden birds on the Feather Note site!", copied: "Link copied", saved: "Picture saved",
     },
     ja: {
       name: "Feather Note", shootTab: "撮る", platforms: "iPhone・Android",
@@ -54,17 +56,17 @@
       endBody: "iPhoneとAndroidで会おう。",
       privacy: "プライバシーポリシー", support: "サポート",
       credits: "© 2026 SummerRiversound · フォント Galmuri（SIL OFL 1.1）",
+      share: "シェア", shareText: "Feather Noteのサイトで隠れた鳥を3羽撮った！", copied: "リンクをコピーした", saved: "画像を保存した",
     },
   };
   const t = k => Site.t(T, k);
   const D = window.DATA;
   const realm = D.realms[Site.lang === "en" ? "north-america" : "east-asia"];
 
-  document.title = t("name");
   Site.applyText(T);
   Site.langSwitch(document.querySelector(".langs"));
   document.querySelectorAll("[data-stores]").forEach(n => { n.innerHTML = Site.stores("feathernote", n.dataset.stores, n.dataset.stores === "bar" ? "small" : ""); });
-  document.querySelectorAll("[data-other]").forEach(a => { a.href = window.SITE_LINKS.cardkkang.site + "?lang=" + Site.lang; });
+  document.querySelectorAll("[data-other]").forEach(a => { a.href = Site.home("cardkkang"); });
   Site.wireSoon();
   Site.desk(document.getElementById("hero"));
 
@@ -160,7 +162,40 @@
       result.querySelector(".lead").before(Object.assign(document.createElement("div"), { className: "slots", innerHTML: slotsHtml(birds) }));
       result.querySelectorAll(".slots .slot").forEach(x => x.classList.add("got"));
       result.classList.add("on");
+      picture = sharePicture(birds.slice());
     }, 700);
+  });
+
+  // share: the scene the birds hid in, the three filled dex slots in a window over it, the
+  // result line and the app's name, as a 4:5 picture (the game's share size).
+  let picture = null;
+  const shareBtn = result.querySelector(".share");
+  function sharePicture(list) {
+    return Site.picture(1080, 1350, async (g) => {
+      const art = await Promise.all(list.map(b => Site.img(`birds/${b.id}.png`)));
+      const k = Math.max(1080 / back.width, 1350 / back.height);
+      g.drawImage(back, (1080 - back.width * k) / 2, (1350 - back.height * k) / 2, back.width * k, back.height * k);
+      g.drawImage(front, (1080 - front.width * k) / 2, (1350 - front.height * k) / 2, front.width * k, front.height * k);
+      Site.pane(g, 48, 760, 984, 542, 4);
+      g.fillStyle = "#2f6b4f"; g.fillRect(60, 772, 960, 72);
+      g.fillStyle = "#fcf8ee"; g.textBaseline = "middle"; g.font = '700 36px "Galmuri11"'; g.fillText(t("resultTitle"), 88, 808, 900);
+      list.forEach((b, i) => {
+        const x = 88 + i * 312, y = 872;
+        Site.pane(g, x, y, 280, 280, 4);
+        g.drawImage(art[i], x + 12, y + 12, 256, 256);
+        g.fillStyle = "#c29435"; g.fillRect(x + 168, y - 14, 124, 44);
+        g.fillStyle = "#1a1c17"; g.font = '700 24px "Galmuri11"'; g.fillText(Site.pad(b.no), x + 180, y + 8, 104);
+      });
+      g.fillStyle = "#1a1c17"; g.font = '700 36px "Galmuri11"'; g.fillText(t("name"), 88, 1210, 900);
+      g.fillStyle = "rgba(26,28,23,.7)"; g.font = '24px "Galmuri11"'; g.fillText(list.map(b => Site.name(b)).join(" · "), 88, 1258, 900);
+    });
+  }
+  shareBtn.addEventListener("click", async () => {
+    if (!picture) return;
+    if (Site.motion) shareBtn.animate([{ transform: "scale(1)" }, { transform: "scale(.86, 1.12)" }, { transform: "scale(1.08, .94)" }, { transform: "scale(1)" }], { duration: 320, easing: "ease-out" });
+    if (Site.motion) result.querySelectorAll(".slots .slot").forEach((x, i) => x.animate([{ translate: "0 0" }, { translate: "0 -10px" }, { translate: "0 0" }], { duration: 380, delay: i * 60, easing: "cubic-bezier(.34,1.56,.64,1)" }));
+    const how = await Site.share(await picture, "feathernote-dex.png", t("shareText"), Site.home("feathernote"));
+    if (how === "copied") say(t("copied")); else if (how === "saved") say(t("saved"));
   });
   result.querySelector(".again").addEventListener("click", () => { result.querySelector(".slots")?.remove(); hide(); });
   function renderDex() {

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko" data-page-lang="ko" data-lang-pages>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<base href="../">
+<title>새찍도감 — 찍으면 채워지는 새 도감</title>
+<meta name="description" content="새를 찍으면 이름이 붙고, 그 한 장이 도감이 되는 탐조 도감 앱. 계정 없이, 판별은 기기 안에서.">
+<link rel="canonical" href="https://summerriversound.github.io/feather-note/ko/">
+<link rel="alternate" hreflang="ko" href="https://summerriversound.github.io/feather-note/ko/">
+<link rel="alternate" hreflang="en" href="https://summerriversound.github.io/feather-note/en/">
+<link rel="alternate" hreflang="ja" href="https://summerriversound.github.io/feather-note/ja/">
+<link rel="alternate" hreflang="x-default" href="https://summerriversound.github.io/feather-note/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://summerriversound.github.io/feather-note/ko/">
+<meta property="og:title" content="새찍도감">
+<meta property="og:description" content="찍으면 채워지는 새 도감. 지금 사이트에서 숨은 새를 찍어 보세요.">
+<meta property="og:image" content="https://summerriversound.github.io/feather-note/img/og-ko.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="새찍도감">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://summerriversound.github.io/feather-note/img/og-ko.png">
+<meta name="theme-color" content="#fcf8ee">
+<link rel="icon" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/icon.png">
+<link rel="stylesheet" href="site.css">
+<style>
+.stage { background: #dce5e8; }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
+.stage .front { pointer-events: none; z-index: 2; }
+/* centred by translate so a flip (transform) turns the bird in place */
+.hid { position: absolute; width: 12%; translate: -50% -50%; filter: drop-shadow(0 2px 0 rgba(26,28,23,.25)); transition: transform .8s var(--bounce), opacity .8s; z-index: 1; }
+.hid.bob { animation: bob 1.8s ease-in-out infinite; }
+.hid.flip { transform: scaleX(-1); }
+@keyframes bob { 50% { translate: -50% calc(-50% - 4px); } }
+.head { position: absolute; top: 14px; left: 0; right: 0; display: grid; justify-items: center; gap: 2px; pointer-events: none; z-index: 3; }
+.head b { font-size: 26px; color: var(--ink); text-shadow: 0 2px 0 var(--cream); }
+.vf { position: absolute; width: 28%; aspect-ratio: 1; left: 50%; top: 52%; transform: translate(-50%, -50%); pointer-events: none; transition: width .15s; z-index: 4; }
+.vf i { position: absolute; width: 22%; height: 22%; border: 3px solid var(--ink); }
+.vf i:nth-child(1) { left: 0; top: 0; border-right: 0; border-bottom: 0; } .vf i:nth-child(2) { right: 0; top: 0; border-left: 0; border-bottom: 0; }
+.vf i:nth-child(3) { left: 0; bottom: 0; border-right: 0; border-top: 0; } .vf i:nth-child(4) { right: 0; bottom: 0; border-left: 0; border-top: 0; }
+.vf::after { content: ""; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px; background: var(--ink); }
+.vf.snap { width: 24%; }
+.flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; transition: opacity .35s; z-index: 5; }
+.flash.on { opacity: .85; transition: none; }
+.dexbar { position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 10px; z-index: 3; max-width: 360px; margin: 0 auto; }
+.stage .hint { color: var(--ink); text-shadow: 0 2px 0 var(--cream); z-index: 3; }
+.result .slots { margin-bottom: 4px; }
+.plate { position: absolute; left: 50%; top: 50%; width: min(52%, 240px); transform: translate(-50%, -50%); padding: 10px; text-align: center; font-size: 15px; transition: transform .5s var(--bounce), opacity .3s; }
+.plate img { width: 100%; background: var(--wash); border: 2px solid var(--ink); }
+.cands { position: absolute; left: 50%; top: 52%; width: min(86%, 380px); transform: translate(-50%, -50%); display: grid; gap: 8px; transition: transform .5s var(--bounce), opacity .3s; }
+.cand { display: grid; grid-template-columns: 44px 1fr; gap: 10px; align-items: center; font-size: 14px; }
+.cand img { width: 44px; height: 44px; background: var(--wash); border: 2px solid var(--ink); }
+.cand .meter { height: 10px; background: var(--inset); border: 2px solid var(--ink); margin-top: 2px; }
+.cand .meter i { display: block; height: 100%; background: var(--field); width: 0; }
+.grid { position: absolute; left: 50%; top: 54%; width: min(86%, 420px); transform: translate(-50%, -50%); padding: 12px; transition: transform .5s var(--bounce), opacity .3s; }
+.grid .mini > div { transition: background .3s; }
+.stamps { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); display: grid; gap: 14px; justify-items: center; width: 90%; }
+.stamp { font-weight: 700; font-size: 20px; border: 3px solid var(--field); color: var(--field); background: var(--cream); padding: 6px 18px; transition: transform .4s var(--bounce), opacity .2s; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="me" href="#hero"><img class="pix" src="img/icon.png" alt=""><span data-t="name"></span></a>
+  <span class="gap"></span>
+  <div class="langs" role="group" aria-label="Language"></div>
+  <div class="stores" data-stores="bar"></div>
+</header>
+
+<section class="hero" id="hero">
+  <nav class="icons desk">
+    <button class="ico" type="button" data-open="w-about"><span class="pic"><img class="pix" src="img/icon.png" alt=""></span><span data-t="wAbout"></span></button>
+    <button class="ico" type="button" data-open="w-dex"><span class="pic"><img class="pix" id="dexIcon" src="img/icon.png" alt=""></span><span data-t="wDex"></span></button>
+    <button class="ico" type="button" data-open="w-other"><span class="pic"><img class="pix" src="img/other.png" alt=""></span><span data-t="other"></span></button>
+    <button class="ico" type="button" data-open="w-legal"><span class="pic"><b>?</b></span><span data-t="wLegal"></span></button>
+  </nav>
+
+  <div class="win dwin desk" id="w-about" style="right:40px;top:36px">
+    <div class="band"><span data-t="wAboutTitle"></span><button type="button" data-t-label="close">×</button></div>
+    <ul><li data-t="f1"></li><li data-t="f2"></li><li data-t="f3"></li><li data-t="f4"></li></ul>
+    <div class="stores" data-stores="desk" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px"></div>
+  </div>
+  <div class="win dwin desk" id="w-dex" style="right:60px;bottom:64px" hidden>
+    <div class="band"><span data-t="wDex"></span><button type="button" data-t-label="close">×</button></div>
+    <div class="mini" id="dex"></div>
+    <p id="dexCount" style="margin-top:8px"></p>
+  </div>
+  <div class="win dwin desk" id="w-other" style="left:140px;bottom:64px" hidden>
+    <div class="band"><span data-t="other"></span><button type="button" data-t-label="close">×</button></div>
+    <a class="bridge" style="border:0;padding:0" data-other><img class="pix" src="img/other.png" alt=""><span><span data-t="otherWhat"></span><br><b data-t="otherGo"></b></span></a>
+  </div>
+  <div class="win dwin desk" id="w-legal" style="left:140px;top:300px" hidden>
+    <div class="band"><span data-t="wLegal"></span><button type="button" data-t-label="close">×</button></div>
+    <ul><li><a href="privacy.html" data-t="privacy"></a></li><li><a href="support.html" data-t="support"></a></li></ul>
+  </div>
+
+  <div class="win main">
+    <div class="band"><span data-t="name"></span><span data-t="shootTab"></span></div>
+    <div class="stage" id="stage">
+      <canvas class="back"></canvas>
+      <canvas class="front"></canvas>
+      <div class="head"><b data-t="name"></b></div>
+      <div class="vf" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="flash"></div>
+      <div class="toast" role="status"></div>
+      <p class="hint" style="top:56px" data-t="hint"></p>
+      <div class="win dexbar"><div class="slots"></div></div>
+      <div class="win result">
+        <div class="band"><span data-t="resultTitle"></span><button class="btn ghost small again" type="button" data-t="again" style="min-height:28px;padding:0 8px"></button></div>
+        <div class="acts" style="display:flex;gap:8px"><button class="btn gold share" type="button"><img class="ic" src="img/share.png" alt="" style="width:32px;height:34px;image-rendering:pixelated;margin:-6px 0"><span data-t="share"></span></button></div>
+        <p class="lead" data-t="resultBody"></p>
+        <div class="stores" data-stores="hero"></div>
+        <a class="bridge" data-other><img class="pix" src="img/other.png" alt=""><span><span data-t="otherWhat"></span><br><b data-t="otherGo"></b></span></a>
+      </div>
+    </div>
+  </div>
+  <div class="taskbar desk"><span data-t="name"></span><span data-t="deskHint"></span></div>
+</section>
+
+<section class="story" id="story" aria-label="">
+  <div class="scene" style="background:#dce5e8">
+    <canvas class="layer pix" id="pano" style="inset:0;width:200%;height:100%"></canvas>
+    <div class="win cap"><div class="step"></div><h2></h2><p></p></div>
+    <div class="actors"></div>
+    <div class="win end">
+      <div class="band"><span data-t="name"></span><span data-t="platforms"></span></div>
+      <p class="lead" data-t="endBody" style="font-size:14px"></p>
+      <div class="stores" data-stores="story" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+      <a class="bridge" data-other><img class="pix" src="img/other.png" alt=""><span><span data-t="otherWhat"></span><br><b data-t="otherGo"></b></span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="in">
+    <a class="win other bridge" data-other style="border-top:2px solid var(--ink)"><img class="pix" src="img/other.png" alt=""><span><span data-t="otherWhat"></span><br><b data-t="otherGo"></b></span></a>
+    <nav><a href="privacy.html" data-t="privacy"></a><a href="support.html" data-t="support"></a></nav>
+    <small data-t="credits"></small>
+  </div>
+</footer>
+
+<script src="links.js"></script>
+<script src="site.js"></script>
+<script src="data.js"></script>
+<script src="page.js"></script>
+</body>
+</html>

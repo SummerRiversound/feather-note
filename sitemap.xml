@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://summerriversound.github.io/feather-note/ko/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://summerriversound.github.io/feather-note/ko/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://summerriversound.github.io/feather-note/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://summerriversound.github.io/feather-note/ja/"/>
+  </url>
+  <url>
+    <loc>https://summerriversound.github.io/feather-note/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://summerriversound.github.io/feather-note/ko/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://summerriversound.github.io/feather-note/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://summerriversound.github.io/feather-note/ja/"/>
+  </url>
+  <url>
+    <loc>https://summerriversound.github.io/feather-note/ja/</loc>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://summerriversound.github.io/feather-note/ko/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://summerriversound.github.io/feather-note/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://summerriversound.github.io/feather-note/ja/"/>
+  </url>
+</urlset>
