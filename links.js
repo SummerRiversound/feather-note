@@ -10,7 +10,7 @@ window.SITE_LINKS = {
   },
   feathernote: {
     site: "https://summerriversound.github.io/feather-note/",
-    appStore: { id: "6822205220", state: "soon", pt: null },
+    appStore: { id: "6822205220", state: "preorder", pt: null, ppid: "4d2a11e0-8829-4943-b557-9e6e1e3d39fe" },
     play: { id: "com.feathernote.app", state: "soon" },
   },
 };
