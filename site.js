@@ -65,7 +65,8 @@
         const s = L[k], label = STORE[k][lang][s.state];
         if (s.state === "soon") return `<span class="btn ${cls || ""}" role="link" aria-disabled="true" tabindex="0" data-soon>${label}</span>`;
         const href = k === "appStore"
-          ? `https://apps.apple.com/app/id${s.id}` + (s.pt ? `?pt=${s.pt}&ct=site-${app}-${spot}&mt=8` : "")
+          ? `https://apps.apple.com/app/id${s.id}` + [s.ppid && `ppid=${s.ppid}`, s.pt && `pt=${s.pt}&ct=site-${app}-${spot}&mt=8`]
+              .filter(Boolean).map((q, i) => (i ? "&" : "?") + q).join("")
           : `https://play.google.com/store/apps/details?id=${s.id}&referrer=${encodeURIComponent(`utm_source=site&utm_campaign=${app}-${spot}`)}`;
         return `<a class="btn ${cls || ""}" href="${href}" rel="noopener">${label}</a>`;
       }).join("");
