@@ -16,6 +16,7 @@
 html { scroll-padding-top: var(--bar); }
 body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.7 var(--pixel); -webkit-text-size-adjust: 100%; }
 h1, h2, h3 { margin: 0; text-wrap: balance; font-weight: 700; }
+:lang(ko) :is(h1, h2, h3) { word-break: keep-all; }  /* Korean breaks between words, not inside one */
 p { margin: 0; }
 a { color: inherit; }
 img.pix, .pix img, canvas.pix { image-rendering: pixelated; }
@@ -133,7 +134,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* scroll story */
 .story { position: relative; height: 460svh; }
 .story .scene { position: sticky; top: var(--bar); height: calc(100svh - var(--bar)); overflow: hidden; background: var(--field); }
-.story .layer { position: absolute; inset: -12% -30%; background: center/cover no-repeat; will-change: transform; image-rendering: pixelated; }
+.story .layer { position: absolute; inset: -12% -30%; background: center/cover no-repeat; will-change: transform; }
 .story .cap { position: absolute; left: 50%; top: 20px; transform: translateX(-50%); width: min(560px, calc(100% - 32px)); z-index: 3; }
 .story .cap h2 { font-size: 22px; line-height: 1.4; }
 .story .cap p { font-size: 14px; color: var(--muted); margin-top: 4px; }
