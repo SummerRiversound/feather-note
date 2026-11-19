@@ -6,7 +6,7 @@
 window.SITE_LINKS = {
   cardkkang: {
     site: "https://summerriversound.github.io/cardkkang/",
-    appStore: { id: "6822955757", state: "preorder", pt: null, ppid: "6511ae59-331c-4852-8b63-a9a481f7bfc4" },
+    appStore: { id: "6822955757", state: "live", pt: null, ppid: "6511ae59-331c-4852-8b63-a9a481f7bfc4" },
   },
   feathernote: {
     site: "https://summerriversound.github.io/feather-note/",
