@@ -3,9 +3,9 @@
   const LANGS = ["ko", "en", "ja"];
   const STORE = {
     appStore: {
-      ko: { soon: "App Store · 곧 출시", preorder: "App Store에서 사전 주문", live: "App Store에서 받기" },
-      en: { soon: "App Store · Coming soon", preorder: "Pre-order on the App Store", live: "Download on the App Store" },
-      ja: { soon: "App Store・近日公開", preorder: "App Storeで予約注文", live: "App Storeでダウンロード" },
+      ko: { soon: "App Store · 곧 출시", preorder: "App Store에서 사전 주문", live: "지금 다운로드" },
+      en: { soon: "App Store · Coming soon", preorder: "Pre-order on the App Store", live: "Download now" },
+      ja: { soon: "App Store・近日公開", preorder: "App Storeで予約注文", live: "今すぐダウンロード" },
     },
     play: {
       ko: { soon: "Google Play · 곧 출시", preorder: "Google Play 사전 등록", live: "Google Play에서 받기" },
