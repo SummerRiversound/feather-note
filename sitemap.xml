@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://summerriversound.github.io/feather-note/ko/</loc>
+    <loc>https://summerriversound.github.io/feather-note/</loc>
+    <lastmod>2026-11-23T08:55:17+09:00</lastmod>
     <xhtml:link rel="alternate" hreflang="ko" href="https://summerriversound.github.io/feather-note/ko/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://summerriversound.github.io/feather-note/en/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://summerriversound.github.io/feather-note/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://summerriversound.github.io/feather-note/"/>
+  </url>
+  <url>
+    <loc>https://summerriversound.github.io/feather-note/ko/</loc>
+    <lastmod>2026-11-23T08:55:17+09:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://summerriversound.github.io/feather-note/ko/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://summerriversound.github.io/feather-note/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://summerriversound.github.io/feather-note/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://summerriversound.github.io/feather-note/"/>
   </url>
   <url>
     <loc>https://summerriversound.github.io/feather-note/en/</loc>
+    <lastmod>2026-11-23T08:55:17+09:00</lastmod>
     <xhtml:link rel="alternate" hreflang="ko" href="https://summerriversound.github.io/feather-note/ko/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://summerriversound.github.io/feather-note/en/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://summerriversound.github.io/feather-note/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://summerriversound.github.io/feather-note/"/>
   </url>
   <url>
     <loc>https://summerriversound.github.io/feather-note/ja/</loc>
+    <lastmod>2026-11-23T08:55:17+09:00</lastmod>
     <xhtml:link rel="alternate" hreflang="ko" href="https://summerriversound.github.io/feather-note/ko/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://summerriversound.github.io/feather-note/en/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://summerriversound.github.io/feather-note/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://summerriversound.github.io/feather-note/"/>
   </url>
 </urlset>

@@ -61,7 +61,7 @@
   };
   const t = k => Site.t(T, k);
   const D = window.DATA;
-  const realm = D.realms[Site.lang === "en" ? "north-america" : "east-asia"];
+  const realm = D.realms[D.realmFor[Site.lang]];
 
   Site.applyText(T);
   Site.langSwitch(document.querySelector(".langs"));

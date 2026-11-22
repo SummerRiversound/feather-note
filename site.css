@@ -47,11 +47,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .bar .me span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bar .gap { flex: 1; }
 .langs { display: flex; border: 2px solid var(--ink); flex: none; }
-.langs button { position: relative; border: 0; background: var(--cream); font-size: 11px; padding: 0 7px; min-height: 32px; min-width: 32px; cursor: pointer; }
+.langs a { position: relative; display: flex; align-items: center; justify-content: center; text-decoration: none; border: 0; background: var(--cream); font-size: 11px; padding: 0 7px; min-height: 32px; min-width: 32px; cursor: pointer; }
 /* drawn small, tapped at 44px */
 .result .again { position: relative; }
-.langs button::before, .bar .me::before, .result .again::before { content: ""; position: absolute; inset: -6px; }
-.langs button[aria-pressed="true"] { background: var(--field); color: var(--cream); }
+.langs a::before, .bar .me::before, .result .again::before { content: ""; position: absolute; inset: -6px; }
+.langs a[aria-current] { background: var(--field); color: var(--cream); }
 .bar .stores { display: flex; gap: 6px; flex: none; }
 @media (max-width: 520px) { .bar .stores .btn:not(:first-child) { display: none; } .bar .me span { display: none; } }
 

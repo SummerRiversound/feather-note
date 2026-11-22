@@ -1,19 +1,6 @@
 // Shared behaviour of the two app sites: language, store buttons, card tilt, desk windows and the scroll story.
 (function () {
   const LANGS = ["ko", "en", "ja"];
-  const STORE = {
-    appStore: {
-      ko: { soon: "App Store · 곧 출시", preorder: "App Store에서 사전 주문", live: "지금 다운로드" },
-      en: { soon: "App Store · Coming soon", preorder: "Pre-order on the App Store", live: "Download now" },
-      ja: { soon: "App Store・近日公開", preorder: "App Storeで予約注文", live: "今すぐダウンロード" },
-    },
-    play: {
-      ko: { soon: "Google Play · 곧 출시", preorder: "Google Play 사전 등록", live: "Google Play에서 받기" },
-      en: { soon: "Google Play · Coming soon", preorder: "Pre-register on Google Play", live: "Get it on Google Play" },
-      ja: { soon: "Google Play・近日公開", preorder: "Google Playで事前登録", live: "Google Playで手に入れよう" },
-    },
-  };
-
   // build.py writes the page again under ko/, en/ and ja/, each marked with its language; the
   // root page picks one. An old ?lang= link on the root moves to that language's page.
   const PAGE = document.documentElement.dataset.pageLang;
@@ -35,10 +22,11 @@
 
   const lang = pickLang();
   document.documentElement.lang = lang;
-  // A language page's <base> points at the root, so a "#part" link there would leave the page.
+  // A language page's <base> points at the root, so build.py writes its "#part" links as "<lang>/#part";
+  // a click points them at this page's own path (it may be .../index.html).
   if (PAGE) document.addEventListener("click", e => {
-    const a = e.target.closest && e.target.closest('a[href^="#"]');
-    if (a) a.href = location.pathname + a.getAttribute("href");
+    const a = e.target.closest && e.target.closest(`a[href^="#"], a[href^="${PAGE}/#"]`);
+    if (a) { const h = a.getAttribute("href"); a.href = location.pathname + h.slice(h.indexOf("#")); }
   }, true);
 
   const Site = {
@@ -49,10 +37,13 @@
       (root || document).querySelectorAll("[data-t]").forEach(n => { n.textContent = Site.t(dict, n.dataset.t); });
       (root || document).querySelectorAll("[data-t-label]").forEach(n => { n.setAttribute("aria-label", Site.t(dict, n.dataset.tLabel)); });
     },
+    // Real links to the language pages (build.py writes the same ones); a click also keeps the choice.
     langSwitch(box) {
-      box.innerHTML = LANGS.map(l => `<button type="button" aria-pressed="${l === lang}" data-l="${l}">${l.toUpperCase()}</button>`).join("");
+      box.innerHTML = LANGS.map(l => `<a href="${l}/" hreflang="${l}" lang="${l}"${l === lang ? ' aria-current="true"' : ""}>${l.toUpperCase()}</a>`).join("");
       box.addEventListener("click", e => {
-        const l = e.target.dataset && e.target.dataset.l; if (!l || l === lang) return;
+        const a = e.target.closest("a[hreflang]"); if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+        e.preventDefault();
+        const l = a.hreflang; if (l === lang) return;
         try { localStorage.setItem("lang", l); } catch (err) {}
         if (PAGES) { location.href = l + "/" + location.hash; return; }  // a language page's <base> is the root
         const u = new URL(location.href); u.searchParams.set("lang", l); location.replace(u);
@@ -62,7 +53,7 @@
     stores(app, spot, cls) {
       const L = window.SITE_LINKS[app];
       return ["appStore", "play"].filter(k => L[k]).map(k => {
-        const s = L[k], label = STORE[k][lang][s.state];
+        const s = L[k], label = window.DATA.stores[k][lang][s.state];  // the labels live in stores.json
         if (s.state === "soon") return `<span class="btn ${cls || ""}" role="link" aria-disabled="true" tabindex="0" data-soon>${label}</span>`;
         const href = k === "appStore"
           ? `https://apps.apple.com/app/id${s.id}` + [s.ppid && `ppid=${s.ppid}`, s.pt && `pt=${s.pt}&ct=site-${app}-${spot}&mt=8`]

@@ -12,22 +12,28 @@
 <link rel="alternate" hreflang="ja" href="https://summerriversound.github.io/feather-note/ja/">
 <link rel="alternate" hreflang="x-default" href="https://summerriversound.github.io/feather-note/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Feather Note">
 <meta property="og:url" content="https://summerriversound.github.io/feather-note/ja/">
 <meta property="og:title" content="Feather Note">
 <meta property="og:description" content="撮れば埋まる鳥の図鑑。サイトで隠れた鳥を撮ってみよう。">
 <meta property="og:image" content="https://summerriversound.github.io/feather-note/img/og-ja.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Feather Note">
+<meta property="og:image:alt" content="Feather Noteの名前と、ファインダーの中のスズメ、図鑑のマスに入った鳥3羽">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:locale:alternate" content="ko_KR">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Feather Note">
+<meta name="twitter:description" content="撮れば埋まる鳥の図鑑。サイトで隠れた鳥を撮ってみよう。">
 <meta name="twitter:image" content="https://summerriversound.github.io/feather-note/img/og-ja.png">
+<meta name="twitter:image:alt" content="Feather Noteの名前と、ファインダーの中のスズメ、図鑑のマスに入った鳥3羽">
 <meta name="apple-itunes-app" content="app-id=6822205220, app-argument=https://summerriversound.github.io/feather-note/ja/">
 <meta name="theme-color" content="#fcf8ee">
-<link rel="icon" href="img/icon.png">
-<link rel="apple-touch-icon" href="img/icon.png">
+<link rel="icon" type="image/png" sizes="48x48" href="img/icon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="img/icon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icon-180.png">
 <link rel="stylesheet" href="site.css">
 <style>
 .stage { background: #dce5e8; }
@@ -66,10 +72,10 @@
 </head>
 <body>
 <header class="bar">
-  <a class="me" href="#hero"><img class="pix" src="img/icon.png" alt=""><span data-t="name"></span></a>
+  <a class="me" href="ja/#hero"><img class="pix" src="img/icon.png" alt=""><span data-t="name"></span></a>
   <span class="gap"></span>
-  <div class="langs" role="group" aria-label="Language"></div>
-  <div class="stores" data-stores="bar"></div>
+  <div class="langs" role="group" aria-label="Language"><a href="ko/" hreflang="ko" lang="ko">KO</a><a href="en/" hreflang="en" lang="en">EN</a><a href="ja/" hreflang="ja" lang="ja" aria-current="true">JA</a></div>
+  <div class="stores" data-stores="bar"><a class="btn small" href="https://apps.apple.com/app/id6822205220?ppid=4d2a11e0-8829-4943-b557-9e6e1e3d39fe" rel="noopener">今すぐダウンロード</a><span class="btn small" role="link" aria-disabled="true" tabindex="0" data-soon>Google Play・近日公開</span></div>
 </header>
 
 <section class="hero" id="hero">
@@ -83,7 +89,7 @@
   <div class="win dwin desk" id="w-about" style="right:40px;top:36px">
     <div class="band"><span data-t="wAboutTitle"></span><button type="button" data-t-label="close">×</button></div>
     <ul><li data-t="f1"></li><li data-t="f2"></li><li data-t="f3"></li><li data-t="f4"></li></ul>
-    <div class="stores" data-stores="desk" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px"></div>
+    <div class="stores" data-stores="desk" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px"><a class="btn " href="https://apps.apple.com/app/id6822205220?ppid=4d2a11e0-8829-4943-b557-9e6e1e3d39fe" rel="noopener">今すぐダウンロード</a><span class="btn " role="link" aria-disabled="true" tabindex="0" data-soon>Google Play・近日公開</span></div>
   </div>
   <div class="win dwin desk" id="w-dex" style="right:60px;bottom:64px" hidden>
     <div class="band"><span data-t="wDex"></span><button type="button" data-t-label="close">×</button></div>
@@ -92,7 +98,7 @@
   </div>
   <div class="win dwin desk" id="w-other" style="left:140px;bottom:64px" hidden>
     <div class="band"><span data-t="other"></span><button type="button" data-t-label="close">×</button></div>
-    <a class="bridge" style="border:0;padding:0" data-other><img class="pix" src="img/other.png" alt=""><span><span data-t="otherWhat"></span><br><b data-t="otherGo"></b></span></a>
+    <a class="bridge" style="border:0;padding:0" data-other href="https://summerriversound.github.io/cardkkang/ja/"><img class="pix" src="img/other.png" alt=""><span><span data-t="otherWhat"></span><br><b data-t="otherGo"></b></span></a>
   </div>
   <div class="win dwin desk" id="w-legal" style="left:140px;top:300px" hidden>
     <div class="band"><span data-t="wLegal"></span><button type="button" data-t-label="close">×</button></div>
@@ -114,8 +120,8 @@
         <div class="band"><span data-t="resultTitle"></span><button class="btn ghost small again" type="button" data-t="again" style="min-height:28px;padding:0 8px"></button></div>
         <div class="acts" style="display:flex;gap:8px"><button class="btn gold share" type="button"><img class="ic" src="img/share.png" alt="" style="width:32px;height:34px;image-rendering:pixelated;margin:-6px 0"><span data-t="share"></span></button></div>
         <p class="lead" data-t="resultBody"></p>
-        <div class="stores" data-stores="hero"></div>
-        <a class="bridge" data-other><img class="pix" src="img/other.png" alt=""><span><span data-t="otherWhat"></span><br><b data-t="otherGo"></b></span></a>
+        <div class="stores" data-stores="hero"><a class="btn " href="https://apps.apple.com/app/id6822205220?ppid=4d2a11e0-8829-4943-b557-9e6e1e3d39fe" rel="noopener">今すぐダウンロード</a><span class="btn " role="link" aria-disabled="true" tabindex="0" data-soon>Google Play・近日公開</span></div>
+        <a class="bridge" data-other href="https://summerriversound.github.io/cardkkang/ja/"><img class="pix" src="img/other.png" alt=""><span><span data-t="otherWhat"></span><br><b data-t="otherGo"></b></span></a>
       </div>
     </div>
   </div>
@@ -130,23 +136,23 @@
     <div class="win end">
       <div class="band"><span data-t="name"></span><span data-t="platforms"></span></div>
       <p class="lead" data-t="endBody" style="font-size:14px"></p>
-      <div class="stores" data-stores="story" style="display:flex;flex-wrap:wrap;gap:8px"></div>
-      <a class="bridge" data-other><img class="pix" src="img/other.png" alt=""><span><span data-t="otherWhat"></span><br><b data-t="otherGo"></b></span></a>
+      <div class="stores" data-stores="story" style="display:flex;flex-wrap:wrap;gap:8px"><a class="btn " href="https://apps.apple.com/app/id6822205220?ppid=4d2a11e0-8829-4943-b557-9e6e1e3d39fe" rel="noopener">今すぐダウンロード</a><span class="btn " role="link" aria-disabled="true" tabindex="0" data-soon>Google Play・近日公開</span></div>
+      <a class="bridge" data-other href="https://summerriversound.github.io/cardkkang/ja/"><img class="pix" src="img/other.png" alt=""><span><span data-t="otherWhat"></span><br><b data-t="otherGo"></b></span></a>
     </div>
   </div>
 </section>
 
 <footer class="foot">
   <div class="in">
-    <a class="win other bridge" data-other style="border-top:2px solid var(--ink)"><img class="pix" src="img/other.png" alt=""><span><span data-t="otherWhat"></span><br><b data-t="otherGo"></b></span></a>
+    <a class="win other bridge" data-other href="https://summerriversound.github.io/cardkkang/ja/" style="border-top:2px solid var(--ink)"><img class="pix" src="img/other.png" alt=""><span><span data-t="otherWhat"></span><br><b data-t="otherGo"></b></span></a>
     <nav><a href="privacy.html" data-t="privacy"></a><a href="support.html" data-t="support"></a></nav>
     <small data-t="credits"></small>
   </div>
 </footer>
 
-<script src="links.js"></script>
-<script src="site.js"></script>
-<script src="data.js"></script>
-<script src="page.js"></script>
+<script src="links.js" defer></script>
+<script src="site.js" defer></script>
+<script src="data.js" defer></script>
+<script src="page.js" defer></script>
 </body>
 </html>
